@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>„’—Ê›Ì</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --success-color: #2ecc71;
+            --danger-color: #e74c3c;
+            --warning-color: #f39c12;
+            --dark-color: #34495e;
+            --light-color: #ecf0f1;
+            --gray-color: #95a5a6;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+        
+        h1, h2, h3, h4 {
+            margin-top: 0;
+            color: var(--dark-color);
+        }
+        
+        .btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-success {
+            background-color: var(--success-color);
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background-color: #27ae60;
+        }
+        
+        .btn-danger {
+            background-color: var(--danger-color);
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background-color: #c0392b;
+        }
+        
+        .income {
+            color: var(--success-color);
+            font-weight: bold;
+        }
+        
+        .expense {
+            color: var(--danger-color);
+            font-weight: bold;
+        }
+        
+        .input-group {
+            margin-bottom: 15px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+        
+        .input-with-mic {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .input-with-mic input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+        
+        .input-with-mic input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .mic-switch {
+            position: relative;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--primary-color);
+            color: #fff;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .mic-switch:hover {
+            background-color: #2980b9;
+        }
+        
+        .mic-switch.mic-active {
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(52, 152, 219, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(52, 152, 219, 0); }
+        }
+        
+        .mic-on, .mic-off {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease-in-out;
+        }
+        
+        .mic-on {
+            z-index: 4;
+        }
+        
+        .mic-off {
+            position: absolute;
+            inset: 0;
+            z-index: 5;
+            opacity: 0;
+        }
+        
+        .mic-checkbox {
+            display: none;
+        }
+        
+        .mic-checkbox:checked + .mic-switch {
+            background-color: var(--danger-color);
+        }
+        
+        .mic-checkbox:checked + .mic-switch .mic-off {
+            opacity: 1;
+        }
+        
+        .mic-checkbox:active + .mic-switch {
+            transform: scale(1.1);
+        }
+        
+        #toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #333;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            z-index: 1000;
+            display: none;
+            min-width: 250px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        #confirmBox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .confirm-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+        
+        .confirm-actions {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .transaction-item {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.2s;
+        }
+        
+        .transaction-item:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .transaction-item:last-child {
+            border-bottom: none;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .card {
+                padding: 15px;
+            }
+            
+            .input-with-mic {
+                flex-direction: row-reverse;
+            }
+            
+            .input-with-mic input {
+                width: 100%;
+            }
+            
+            html[dir="rtl"] .input-with-mic {
+                flex-direction: row;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            h2 {
+                font-size: 20px;
+            }
+            
+            .btn {
+                padding: 8px 12px;
+                font-size: 14px;
+            }
+            
+            #balance {
+                font-size: 24px;
+            }
+            
+            .transaction-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .transaction-item > div:last-child {
+                margin-top: 10px;
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            
+            #toast {
+                font-size: 14px;
+                padding: 10px 20px;
+            }
+        }
+
+        @media (min-width: 601px) and (max-width: 900px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .card {
+                padding: 18px;
+            }
+        }
+
+        @media (min-width: 1201px) {
+            .container {
+                max-width: 1400px;
+            }
+        }
+
+        html {
+            font-size: 16px;
+        }
+
+        @media (max-width: 400px) {
+            html {
+                font-size: 14px;
+            }
+        }
+
+        input, select, textarea {
+            font-size: 16px !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- ⁄‰Ê«‰ «· ÿ»Ìﬁ -->
+        <div class="card" style="margin-bottom: 20px;">
+            <h1 style="margin: 0;">„’—Ê›Ì</h1>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr; gap: 20px;">
+            <!-- »ÿ«ﬁ… «·—’Ìœ -->
+            <div class="card">
+                <h2>—’Ìœﬂ «·Õ«·Ì</h2>
+                <p id="balance" style="font-size: 28px; font-weight: bold; text-align: center; margin: 10px 0; color: var(--primary-color);">0.00 EGP</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div style="background-color: #e8f8f5; padding: 15px; border-radius: 8px;">
+                        <p>≈Ã„«·Ì «·œŒ·</p>
+                        <p id="totalIncome" style="font-weight: bold; font-size: 18px; color: var(--success-color);">0.00</p>
+                    </div>
+                    <div style="background-color: #fdedec; padding: 15px; border-radius: 8px;">
+                        <p>≈Ã„«·Ì «·„’—Ê›« </p>
+                        <p id="totalExpense" style="font-weight: bold; font-size: 18px; color: var(--danger-color);">0.00</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ‰„Ê–Ã ≈÷«›… „⁄«„·… -->
+            <div class="card">
+                <h2>≈÷«›… „⁄«„·… ÃœÌœ…</h2>
+                <div class="input-group">
+                    <label>«·„»·€</label>
+                    <input id="amount" type="number" placeholder="0.00" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 16px;">
+                </div>
+                <div class="input-group">
+                    <label>«·Ê’›</label>
+                    <div class="input-with-mic">
+                        <input id="note" type="text" placeholder="Ê’› «·„⁄«„·…">
+                        <input type="checkbox" id="micNoteCheckbox" class="mic-checkbox">
+                        <label class="mic-switch" for="micNoteCheckbox">
+                            <div class="mic-on">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M5 3a3 3 0 0 1 6 0v5a3 3 0 0 1-6 0V3z"/>
+                                    <path d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5z"/>
+                                </svg>
+                            </div>
+                            <div class="mic-off">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M13 8c0 .564-.094 1.107-.266 1.613l-.814-.814A4.02 4.02 0 0 0 12 8V7a.5.5 0 0 1 1 0v1zm-5 4c.818 0 1.578-.245 2.212-.667l.718.719a4.973 4.973 0 0 1-2.43.923V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 1 0v1a4 4 0 0 0 4 4zm3-9v4.879L5.158 2.037A3.001 3.001 0 0 1 11 3z"/>
+                                    <path d="M9.486 10.607 5 6.12V8a3 3 0 0 0 4.486 2.607zm-7.84-9.253 12 12 .708-.708-12-12-.708.708z"/>
+                                </svg>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px;">
+                    <button id="addIncome" class="btn btn-success">≈÷«›… œŒ·</button>
+                    <button id="addExpense" class="btn btn-danger">≈÷«›… „’—Ê›</button>
+                </div>
+            </div>
+
+            <!-- ”Ã· «·„⁄«„·«  -->
+            <div class="card">
+                <h2 style="margin-bottom: 15px;">”Ã· «·„⁄«„·« </h2>
+                <div id="transactions"></div>
+            </div>
+
+            <!-- ≈œ«—… «·»Ì«‰«  -->
+            <div class="card">
+                <h2>≈œ«—… «·»Ì«‰« </h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <button id="exportData" class="btn btn-primary"> ’œÌ— «·»Ì«‰« </button>
+                    <button id="importData" class="btn btn-primary">«” Ì—«œ «·»Ì«‰« </button>
+                    <input type="file" id="importFile" accept=".json" style="display: none;">
+                    <button id="resetBtn" class="btn btn-danger" style="grid-column: span 2;">≈⁄«œ… ÷»ÿ «·»Ì«‰« </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--  √ﬂÌœ ≈⁄«œ… «·÷»ÿ -->
+    <div id="confirmBox">
+        <div class="confirm-content">
+            <h3> √ﬂÌœ ≈⁄«œ… «·÷»ÿ</h3>
+            <p>Â· √‰  „ √ﬂœ √‰ﬂ  —Ìœ Õ–› Ã„Ì⁄ «·»Ì«‰« ø ·« Ì„ﬂ‰ﬂ «· —«Ã⁄ ⁄‰ Â–« «·≈Ã—«¡.</p>
+            <div class="confirm-actions">
+                <button id="cancelBtn" class="btn btn-primary">≈·€«¡</button>
+                <button id="confirmReset" class="btn btn-danger"> √ﬂÌœ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- —”«·… «· ‰»ÌÂ -->
+    <div id="toast">
+        <span id="toastMessage"></span>
+    </div>
+
+    <script src="script.js"></script>
+<h1>»—„ÃÂ «·„Â‰œ”:„Õ„œ «ÌÂ«»</h1>
+</body>
+</html>
