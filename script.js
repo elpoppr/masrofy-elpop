@@ -1,10 +1,10 @@
-// ÈíÇäÇÊ ÇáÊØÈíŞ
+// Ø¨ÙŠØ§Ù†Ø§Øª Ø§Ù„ØªØ·Ø¨ÙŠÙ‚
 let appData = {
     balance: parseFloat(localStorage.getItem("balance")) || 0,
     transactions: JSON.parse(localStorage.getItem("transactions")) || []
 };
 
-// ÚäÇÕÑ DOM
+// Ø¹Ù†Ø§ØµØ± DOM
 const elements = {
     balance: document.getElementById("balance"),
     amount: document.getElementById("amount"),
@@ -26,12 +26,12 @@ const elements = {
     micNoteCheckbox: document.getElementById("micNoteCheckbox")
 };
 
-// ÊåíÆÉ ÇáÊÚÑİ Úáì ÇáßáÇã
+// ØªÙ‡ÙŠØ¦Ø© Ø§Ù„ØªØ¹Ø±Ù Ø¹Ù„Ù‰ Ø§Ù„ÙƒÙ„Ø§Ù…
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 let recognition;
 let activeMic = null;
 
-// ÏÇáÉ áÖÈØ ÍÌã ÇáÎØ ÈäÇÁğ Úáì ÍÌã ÇáÔÇÔÉ
+// Ø¯Ø§Ù„Ø© Ù„Ø¶Ø¨Ø· Ø­Ø¬Ù… Ø§Ù„Ø®Ø· Ø¨Ù†Ø§Ø¡Ù‹ Ø¹Ù„Ù‰ Ø­Ø¬Ù… Ø§Ù„Ø´Ø§Ø´Ø©
 function adjustFontSize() {
     const width = window.innerWidth;
     const html = document.documentElement;
@@ -45,7 +45,7 @@ function adjustFontSize() {
     }
 }
 
-// ÊåíÆÉ ÇáÊØÈíŞ
+// ØªÙ‡ÙŠØ¦Ø© Ø§Ù„ØªØ·Ø¨ÙŠÙ‚
 function initApp() {
     adjustFontSize();
     setupVoiceRecognition();
@@ -55,7 +55,7 @@ function initApp() {
     window.addEventListener('resize', adjustFontSize);
 }
 
-// ÅÚÏÇÏ ÇáÊÚÑİ ÇáÕæÊí
+// Ø¥Ø¹Ø¯Ø§Ø¯ Ø§Ù„ØªØ¹Ø±Ù Ø§Ù„ØµÙˆØªÙŠ
 function setupVoiceRecognition() {
     if (SpeechRecognition) {
         recognition = new SpeechRecognition();
@@ -82,21 +82,21 @@ function setupVoiceRecognition() {
         };
         
         recognition.onerror = function(event) {
-            showToast("ÍÏË ÎØÃ İí ÇáÊÚÑİ Úáì ÇáÕæÊ", "error");
+            showToast("Ø­Ø¯Ø« Ø®Ø·Ø£ ÙÙŠ Ø§Ù„ØªØ¹Ø±Ù Ø¹Ù„Ù‰ Ø§Ù„ØµÙˆØª", "error");
         };
     } else {
-        showToast("ÇáãÊÕİÍ áÇ íÏÚã ÇáÊÚÑİ Úáì ÇáÕæÊ", "error");
+        showToast("Ø§Ù„Ù…ØªØµÙØ­ Ù„Ø§ ÙŠØ¯Ø¹Ù… Ø§Ù„ØªØ¹Ø±Ù Ø¹Ù„Ù‰ Ø§Ù„ØµÙˆØª", "error");
     }
 }
 
-// ÈÏÁ ÇáÊÚÑİ ÇáÕæÊí
+// Ø¨Ø¯Ø¡ Ø§Ù„ØªØ¹Ø±Ù Ø§Ù„ØµÙˆØªÙŠ
 function startVoiceRecognition(checkbox) {
     if (recognition) {
         activeMic = checkbox.nextElementSibling;
         try {
             recognition.start();
         } catch (e) {
-            showToast("áÇ íãßä ÈÏÁ ÇáÊÚÑİ Úáì ÇáÕæÊ", "error");
+            showToast("Ù„Ø§ ÙŠÙ…ÙƒÙ† Ø¨Ø¯Ø¡ Ø§Ù„ØªØ¹Ø±Ù Ø¹Ù„Ù‰ Ø§Ù„ØµÙˆØª", "error");
             checkbox.checked = false;
         }
     } else {
@@ -104,18 +104,18 @@ function startVoiceRecognition(checkbox) {
     }
 }
 
-// ÅÖÇİÉ ãÚÇãáÉ ÌÏíÏÉ
+// Ø¥Ø¶Ø§ÙØ© Ù…Ø¹Ø§Ù…Ù„Ø© Ø¬Ø¯ÙŠØ¯Ø©
 function addTransaction(type) {
     const amount = parseFloat(elements.amount.value);
     const note = elements.note.value.trim();
     
     if (isNaN(amount)) {
-        showToast("ÇáÑÌÇÁ ÅÏÎÇá ãÈáÛ ÕÍíÍ", "error");
+        showToast("Ø§Ù„Ø±Ø¬Ø§Ø¡ Ø¥Ø¯Ø®Ø§Ù„ Ù…Ø¨Ù„Øº ØµØ­ÙŠØ­", "error");
         return;
     }
     
     if (note === "") {
-        showToast("ÇáÑÌÇÁ ÅÏÎÇá æÕİ", "error");
+        showToast("Ø§Ù„Ø±Ø¬Ø§Ø¡ Ø¥Ø¯Ø®Ø§Ù„ ÙˆØµÙ", "error");
         return;
     }
     
@@ -139,10 +139,10 @@ function addTransaction(type) {
     updateUI();
     resetForm();
     
-    showToast(`ÊãÊ ÅÖÇİÉ ${type === "income" ? "ÏÎá" : "ãÕÑæİ"} ÈäÌÇÍ`, "success");
+    showToast(`ØªÙ…Øª Ø¥Ø¶Ø§ÙØ© ${type === "income" ? "Ø¯Ø®Ù„" : "Ù…ØµØ±ÙˆÙ"} Ø¨Ù†Ø¬Ø§Ø­`, "success");
 }
 
-// ÊÍÏíË æÇÌåÉ ÇáãÓÊÎÏã
+// ØªØ­Ø¯ÙŠØ« ÙˆØ§Ø¬Ù‡Ø© Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…
 function updateUI() {
     elements.balance.textContent = `${appData.balance.toFixed(2)} EGP`;
     
@@ -160,9 +160,9 @@ function updateUI() {
     updateTransactionsList();
 }
 
-// ÊÍÏíË ŞÇÆãÉ ÇáãÚÇãáÇÊ
+// ØªØ­Ø¯ÙŠØ« Ù‚Ø§Ø¦Ù…Ø© Ø§Ù„Ù…Ø¹Ø§Ù…Ù„Ø§Øª
 function updateTransactionsList() {
-    // ÚÑÖ ÌãíÚ ÇáãÚÇãáÇÊ Ïæä ÊÕİíÉ
+    // Ø¹Ø±Ø¶ Ø¬Ù…ÙŠØ¹ Ø§Ù„Ù…Ø¹Ø§Ù…Ù„Ø§Øª Ø¯ÙˆÙ† ØªØµÙÙŠØ©
     let transactionsToShow = [...appData.transactions];
     
     transactionsToShow.sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -171,7 +171,7 @@ function updateTransactionsList() {
     
     if (transactionsToShow.length === 0) {
         html = `<div class="transaction-item">
-            <p>áÇ ÊæÌÏ ãÚÇãáÇÊ</p>
+            <p>Ù„Ø§ ØªÙˆØ¬Ø¯ Ù…Ø¹Ø§Ù…Ù„Ø§Øª</p>
         </div>`;
     } else {
         transactionsToShow.forEach(transaction => {
@@ -189,7 +189,7 @@ function updateTransactionsList() {
                             ${transaction.type === "income" ? "+" : "-"}${transaction.amount.toFixed(2)}
                         </p>
                         <button onclick="deleteTransaction(${transaction.id})" class="btn" style="padding: 2px 5px; font-size: 12px;">
-                            ÍĞİ
+                            Ø­Ø°Ù
                         </button>
                     </div>
                 </div>
@@ -200,7 +200,7 @@ function updateTransactionsList() {
     elements.transactions.innerHTML = html;
 }
 
-// ÍĞİ ãÚÇãáÉ
+// Ø­Ø°Ù Ù…Ø¹Ø§Ù…Ù„Ø©
 function deleteTransaction(id) {
     const index = appData.transactions.findIndex(t => t.id === id);
     if (index !== -1) {
@@ -216,11 +216,11 @@ function deleteTransaction(id) {
         saveData();
         updateUI();
         
-        showToast("Êã ÍĞİ ÇáãÚÇãáÉ", "success");
+        showToast("ØªÙ… Ø­Ø°Ù Ø§Ù„Ù…Ø¹Ø§Ù…Ù„Ø©", "success");
     }
 }
 
-// ÊÕÏíÑ ÇáÈíÇäÇÊ
+// ØªØµØ¯ÙŠØ± Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª
 function exportData() {
     const dataStr = JSON.stringify(appData);
     const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
@@ -232,15 +232,15 @@ function exportData() {
     linkElement.setAttribute('download', exportFileDefaultName);
     linkElement.click();
     
-    showToast("Êã ÊÕÏíÑ ÇáÈíÇäÇÊ", "success");
+    showToast("ØªÙ… ØªØµØ¯ÙŠØ± Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª", "success");
 }
 
-// ÇÓÊíÑÇÏ ÇáÈíÇäÇÊ
+// Ø§Ø³ØªÙŠØ±Ø§Ø¯ Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª
 function importData() {
     elements.importFile.click();
 }
 
-// ãÚÇáÌÉ ãáİ ÇáÇÓÊíÑÇÏ
+// Ù…Ø¹Ø§Ù„Ø¬Ø© Ù…Ù„Ù Ø§Ù„Ø§Ø³ØªÙŠØ±Ø§Ø¯
 function handleFileImport(e) {
     const file = e.target.files[0];
     if (!file) return;
@@ -254,19 +254,19 @@ function handleFileImport(e) {
                 appData = data;
                 saveData();
                 updateUI();
-                showToast("Êã ÇÓÊíÑÇÏ ÇáÈíÇäÇÊ ÈäÌÇÍ", "success");
+                showToast("ØªÙ… Ø§Ø³ØªÙŠØ±Ø§Ø¯ Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª Ø¨Ù†Ø¬Ø§Ø­", "success");
             } else {
-                showToast("ãáİ ÛíÑ ÕÇáÍ", "error");
+                showToast("Ù…Ù„Ù ØºÙŠØ± ØµØ§Ù„Ø­", "error");
             }
         } catch (err) {
-            showToast("ÎØÃ İí ŞÑÇÁÉ Çáãáİ", "error");
+            showToast("Ø®Ø·Ø£ ÙÙŠ Ù‚Ø±Ø§Ø¡Ø© Ø§Ù„Ù…Ù„Ù", "error");
         }
     };
     reader.readAsText(file);
     e.target.value = "";
 }
 
-// ÅÚÇÏÉ ÊÚííä ÇáÈíÇäÇÊ
+// Ø¥Ø¹Ø§Ø¯Ø© ØªØ¹ÙŠÙŠÙ† Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª
 function resetData() {
     appData = {
         balance: 0,
@@ -276,10 +276,10 @@ function resetData() {
     saveData();
     updateUI();
     elements.confirmBox.style.display = "none";
-    showToast("Êã ÅÚÇÏÉ ÊÚííä ÇáÈíÇäÇÊ", "success");
+    showToast("ØªÙ… Ø¥Ø¹Ø§Ø¯Ø© ØªØ¹ÙŠÙŠÙ† Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª", "success");
 }
 
-// ÚÑÖ ÑÓÇáÉ toast
+// Ø¹Ø±Ø¶ Ø±Ø³Ø§Ù„Ø© toast
 function showToast(message, type) {
     elements.toastMessage.textContent = message;
     elements.toast.style.backgroundColor = type === "error" ? "#e74c3c" : "#2ecc71";
@@ -290,19 +290,19 @@ function showToast(message, type) {
     }, 3000);
 }
 
-// ÍİÙ ÇáÈíÇäÇÊ İí localStorage
+// Ø­ÙØ¸ Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª ÙÙŠ localStorage
 function saveData() {
     localStorage.setItem("balance", appData.balance.toString());
     localStorage.setItem("transactions", JSON.stringify(appData.transactions));
 }
 
-// ÅÚÇÏÉ ÊÚííä äãæĞÌ ÇáãÚÇãáÉ
+// Ø¥Ø¹Ø§Ø¯Ø© ØªØ¹ÙŠÙŠÙ† Ù†Ù…ÙˆØ°Ø¬ Ø§Ù„Ù…Ø¹Ø§Ù…Ù„Ø©
 function resetForm() {
     elements.amount.value = "";
     elements.note.value = "";
 }
 
-// ÅÚÏÇÏ ãÓÊãÚí ÇáÃÍÏÇË
+// Ø¥Ø¹Ø¯Ø§Ø¯ Ù…Ø³ØªÙ…Ø¹ÙŠ Ø§Ù„Ø£Ø­Ø¯Ø§Ø«
 function setupEventListeners() {
     elements.addIncome.addEventListener("click", () => addTransaction("income"));
     elements.addExpense.addEventListener("click", () => addTransaction("expense"));
@@ -323,8 +323,8 @@ function setupEventListeners() {
     });
 }
 
-// ÌÚá ÇáÏæÇá ãÊÇÍÉ ÚÇáãíÇğ
+// Ø¬Ø¹Ù„ Ø§Ù„Ø¯ÙˆØ§Ù„ Ù…ØªØ§Ø­Ø© Ø¹Ø§Ù„Ù…ÙŠØ§Ù‹
 window.deleteTransaction = deleteTransaction;
 
-// ÊåíÆÉ ÇáÊØÈíŞ ÚäÏ ÊÍãíá ÇáÕİÍÉ
+// ØªÙ‡ÙŠØ¦Ø© Ø§Ù„ØªØ·Ø¨ÙŠÙ‚ Ø¹Ù†Ø¯ ØªØ­Ù…ÙŠÙ„ Ø§Ù„ØµÙØ­Ø©
 document.addEventListener("DOMContentLoaded", initApp);
