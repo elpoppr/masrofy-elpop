@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ใีัๆÝํ</title>
+    <title>ู…ุตุฑููู</title>
     <style>
         :root {
             --primary-color: #3498db;
@@ -349,39 +349,39 @@
 </head>
 <body>
     <div class="container">
-        <!-- ฺไๆวไ วแสุศํÞ -->
+        <!-- ุนููุงู ุงูุชุทุจูู -->
         <div class="card" style="margin-bottom: 20px;">
-            <h1 style="margin: 0;">ใีัๆÝํ</h1>
+            <h1 style="margin: 0;">ู…ุตุฑููู</h1>
         </div>
 
         <div style="display: grid; grid-template-columns: 1fr; gap: 20px;">
-            <!-- ศุวÞษ วแัีํฯ -->
+            <!-- ุจุทุงูุฉ ุงูุฑุตูุฏ -->
             <div class="card">
-                <h2>ัีํฯ฿ วแอวแํ</h2>
+                <h2>ุฑุตูุฏู ุงูุญุงูู</h2>
                 <p id="balance" style="font-size: 28px; font-weight: bold; text-align: center; margin: 10px 0; color: var(--primary-color);">0.00 EGP</p>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
                     <div style="background-color: #e8f8f5; padding: 15px; border-radius: 8px;">
-                        <p>ลฬใวแํ วแฯฮแ</p>
+                        <p>ุฅุฌู…ุงูู ุงูุฏุฎู</p>
                         <p id="totalIncome" style="font-weight: bold; font-size: 18px; color: var(--success-color);">0.00</p>
                     </div>
                     <div style="background-color: #fdedec; padding: 15px; border-radius: 8px;">
-                        <p>ลฬใวแํ วแใีัๆÝวส</p>
+                        <p>ุฅุฌู…ุงูู ุงูู…ุตุฑููุงุช</p>
                         <p id="totalExpense" style="font-weight: bold; font-size: 18px; color: var(--danger-color);">0.00</p>
                     </div>
                 </div>
             </div>
 
-            <!-- ไใๆะฬ ลึวÝษ ใฺวใแษ -->
+            <!-- ูู…ูุฐุฌ ุฅุถุงูุฉ ู…ุนุงู…ูุฉ -->
             <div class="card">
-                <h2>ลึวÝษ ใฺวใแษ ฬฯํฯษ</h2>
+                <h2>ุฅุถุงูุฉ ู…ุนุงู…ูุฉ ุฌุฏูุฏุฉ</h2>
                 <div class="input-group">
-                    <label>วแใศแÛ</label>
+                    <label>ุงูู…ุจูุบ</label>
                     <input id="amount" type="number" placeholder="0.00" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 16px;">
                 </div>
                 <div class="input-group">
-                    <label>วแๆีÝ</label>
+                    <label>ุงููุตู</label>
                     <div class="input-with-mic">
-                        <input id="note" type="text" placeholder="ๆีÝ วแใฺวใแษ">
+                        <input id="note" type="text" placeholder="ูุตู ุงูู…ุนุงู…ูุฉ">
                         <input type="checkbox" id="micNoteCheckbox" class="mic-checkbox">
                         <label class="mic-switch" for="micNoteCheckbox">
                             <div class="mic-on">
@@ -400,48 +400,48 @@
                     </div>
                 </div>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px;">
-                    <button id="addIncome" class="btn btn-success">ลึวÝษ ฯฮแ</button>
-                    <button id="addExpense" class="btn btn-danger">ลึวÝษ ใีัๆÝ</button>
+                    <button id="addIncome" class="btn btn-success">ุฅุถุงูุฉ ุฏุฎู</button>
+                    <button id="addExpense" class="btn btn-danger">ุฅุถุงูุฉ ู…ุตุฑูู</button>
                 </div>
             </div>
 
-            <!-- ำฬแ วแใฺวใแวส -->
+            <!-- ุณุฌู ุงูู…ุนุงู…ูุงุช -->
             <div class="card">
-                <h2 style="margin-bottom: 15px;">ำฬแ วแใฺวใแวส</h2>
+                <h2 style="margin-bottom: 15px;">ุณุฌู ุงูู…ุนุงู…ูุงุช</h2>
                 <div id="transactions"></div>
             </div>
 
-            <!-- ลฯวัษ วแศํวไวส -->
+            <!-- ุฅุฏุงุฑุฉ ุงูุจูุงูุงุช -->
             <div class="card">
-                <h2>ลฯวัษ วแศํวไวส</h2>
+                <h2>ุฅุฏุงุฑุฉ ุงูุจูุงูุงุช</h2>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                    <button id="exportData" class="btn btn-primary">สีฯํั วแศํวไวส</button>
-                    <button id="importData" class="btn btn-primary">วำสํัวฯ วแศํวไวส</button>
+                    <button id="exportData" class="btn btn-primary">ุชุตุฏูุฑ ุงูุจูุงูุงุช</button>
+                    <button id="importData" class="btn btn-primary">ุงุณุชูุฑุงุฏ ุงูุจูุงูุงุช</button>
                     <input type="file" id="importFile" accept=".json" style="display: none;">
-                    <button id="resetBtn" class="btn btn-danger" style="grid-column: span 2;">ลฺวฯษ ึศุ วแศํวไวส</button>
+                    <button id="resetBtn" class="btn btn-danger" style="grid-column: span 2;">ุฅุนุงุฏุฉ ุถุจุท ุงูุจูุงูุงุช</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- สร฿ํฯ ลฺวฯษ วแึศุ -->
+    <!-- ุชุฃููุฏ ุฅุนุงุฏุฉ ุงูุถุจุท -->
     <div id="confirmBox">
         <div class="confirm-content">
-            <h3>สร฿ํฯ ลฺวฯษ วแึศุ</h3>
-            <p>ๅแ รไส ใสร฿ฯ รไ฿ สัํฯ อะÝ ฬใํฺ วแศํวไวสฟ แว ํใ฿ไ฿ วแสัวฬฺ ฺไ ๅะว วแลฬัวม.</p>
+            <h3>ุชุฃููุฏ ุฅุนุงุฏุฉ ุงูุถุจุท</h3>
+            <p>ูู ุฃูุช ู…ุชุฃูุฏ ุฃูู ุชุฑูุฏ ุญุฐู ุฌู…ูุน ุงูุจูุงูุงุชุ ูุง ูู…ููู ุงูุชุฑุงุฌุน ุนู ูุฐุง ุงูุฅุฌุฑุงุก.</p>
             <div class="confirm-actions">
-                <button id="cancelBtn" class="btn btn-primary">ลแÛวม</button>
-                <button id="confirmReset" class="btn btn-danger">สร฿ํฯ</button>
+                <button id="cancelBtn" class="btn btn-primary">ุฅูุบุงุก</button>
+                <button id="confirmReset" class="btn btn-danger">ุชุฃููุฏ</button>
             </div>
         </div>
     </div>
 
-    <!-- ัำวแษ วแสไศํๅ -->
+    <!-- ุฑุณุงูุฉ ุงูุชูุจูู -->
     <div id="toast">
         <span id="toastMessage"></span>
     </div>
 
     <script src="script.js"></script>
-<h1>ศัใฬๅ วแใๅไฯำ:ใอใฯ วํๅวศ</h1>
+<h1>ุจุฑู…ุฌู ุงูู…ููุฏุณ:ู…ุญู…ุฏ ุงููุงุจ</h1>
 </body>
 </html>
